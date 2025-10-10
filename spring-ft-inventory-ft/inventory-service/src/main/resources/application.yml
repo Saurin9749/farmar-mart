@@ -1,0 +1,35 @@
+
+server:
+  port: 8081
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      demoCB:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+  retry:
+    instances:
+      globalRetry:
+        maxAttempts: 3
+        waitDuration: 300ms
+  ratelimiter:
+    instances:
+      demoRateLimiter:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 500ms
+  timelimiter:
+    instances:
+      demoTimeLimiter:
+        timeoutDuration: 1s
+  bulkhead:
+    thread-pool:
+      demoBulkhead:
+        coreThreadPoolSize: 2
+        maxThreadPoolSize: 4
+        queueCapacity: 10
+spring:
+  main:
+    allow-bean-definition-overriding: true
