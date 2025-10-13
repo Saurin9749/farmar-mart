@@ -5,15 +5,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BulkheadDemoService {
-
-    @Bulkhead(name = "demoBulkhead", type = io.github.resilience4j.bulkhead.Bulkhead.Type.THREADPOOL)
+    @Bulkhead(name = "demoBulkhead", type = Bulkhead.Type.THREADPOOL, fallbackMethod = "bulkheadFallback")
     public String protectedOperation() {
-        // simulate some work that might block for a bit
         try {
-            Thread.sleep(300);
+            // slow korlam
+            Thread.sleep(30);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return "bulkhead-response";
+        return "Processed by " + Thread.currentThread().getName();
+    }
+    public String bulkheadFallback(Throwable t) {
+        return "Bulkhead busy! Please try again later.";
     }
 }

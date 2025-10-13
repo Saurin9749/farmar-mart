@@ -58,7 +58,7 @@ public class FaultAllDemoController {
     }
 
     @GetMapping("/fault/cache/{id}")
-    public String cache(@PathVariable int id) {
+    public String cache(@PathVariable ("id") int id) {
         return cacheSvc.getItem(id);
     }
 

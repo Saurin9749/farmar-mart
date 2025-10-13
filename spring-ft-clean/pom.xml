@@ -28,7 +28,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Spring Boot dependencies BOM -->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
@@ -36,8 +35,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
-      <!-- Spring Cloud BOM -->
       <dependency>
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-dependencies</artifactId>
@@ -45,8 +42,6 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
-      <!-- Resilience4j BOM -->
       <dependency>
         <groupId>io.github.resilience4j</groupId>
         <artifactId>resilience4j-bom</artifactId>

@@ -1,0 +1,33 @@
+server:
+  port: 8091
+
+spring:
+  application:
+    name: order-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      inventoryService:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 4
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+  retry:
+    instances:
+      inventoryService:
+        maxAttempts: 2
+        waitDuration: 500ms
+  timelimiter:
+    instances:
+      inventoryService:
+        timeoutDuration: 2s
+  bulkhead:
+    instances:
+      inventoryService:
+        maxConcurrentCalls: 5

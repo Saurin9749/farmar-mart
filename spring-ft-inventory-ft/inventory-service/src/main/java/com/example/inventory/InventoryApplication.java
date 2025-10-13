@@ -16,7 +16,6 @@ public class InventoryApplication {
 
     @GetMapping("/stock/{id}")
     public String stock(@PathVariable String id) throws InterruptedException {
-        // "slow" simulates latency; "down" throws exception to simulate failure
         if ("slow".equals(id)) {
             Thread.sleep(4000); // 4 seconds
         }

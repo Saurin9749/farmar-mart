@@ -12,7 +12,6 @@ public class FaultTolerantDemo {
     @Retry(name = "globalRetry")
     @Bulkhead(name = "demoBulkhead", type = Bulkhead.Type.THREADPOOL)
     public String unstableOperation() {
-        // simulate unstable operation - in real project replace with remote call
         if (Math.random() < 0.7) {
             throw new RuntimeException("simulated failure");
         }

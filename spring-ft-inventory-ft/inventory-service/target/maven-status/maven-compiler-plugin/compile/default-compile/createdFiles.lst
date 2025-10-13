@@ -1,0 +1,12 @@
+com/example/inventory/controller/FaultDemoController.class
+com/example/inventory/faulttolerance/FaultTolerantDemo.class
+com/example/inventory/faulttolerance/CircuitBreakerDemoService.class
+com/example/inventory/faulttolerance/CombinedDemoService.class
+com/example/inventory/faulttolerance/RetryDemoService.class
+com/example/inventory/faulttolerance/FaultToleranceConfig.class
+com/example/inventory/InventoryApplication.class
+com/example/inventory/faulttolerance/BulkheadDemoService.class
+com/example/inventory/faulttolerance/RateLimiterDemoService.class
+com/example/inventory/controller/FaultAllDemoController.class
+com/example/inventory/faulttolerance/TimeLimiterDemoService.class
+com/example/inventory/faulttolerance/CacheFallbackDemoService.class

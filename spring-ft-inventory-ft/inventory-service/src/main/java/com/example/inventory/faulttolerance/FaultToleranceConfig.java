@@ -24,7 +24,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 @EnableRetry
 public class FaultToleranceConfig {
 
-    // Global Retry config used by @Retry(name="globalRetry") or programmatic calls
     @Bean
     public RetryConfig globalRetryConfig() {
         return RetryConfig.custom()
@@ -37,8 +36,6 @@ public class FaultToleranceConfig {
     public RetryRegistry retryRegistry(RetryConfig config) {
         return RetryRegistry.of(config);
     }
-
-    // Circuit breaker config: fail if more than 50% failures in 10 calls sliding window
     @Bean
     public CircuitBreakerConfig demoCircuitBreakerConfig() {
         return CircuitBreakerConfig.custom()
@@ -55,7 +52,6 @@ public class FaultToleranceConfig {
         return CircuitBreakerRegistry.of(config);
     }
 
-    // Rate limiter config: 5 permits per second with a timeout of 500ms
     @Bean
     public RateLimiterConfig demoRateLimiterConfig() {
         return RateLimiterConfig.custom()

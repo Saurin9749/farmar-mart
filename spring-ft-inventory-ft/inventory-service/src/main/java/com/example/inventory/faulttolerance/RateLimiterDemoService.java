@@ -8,7 +8,6 @@ public class RateLimiterDemoService {
 
     @RateLimiter(name = "demoRateLimiter", fallbackMethod = "fallback")
     public String limited() {
-        // trivial fast operation; rate limiter will throttle calls
         return "rate-limited-response at " + System.currentTimeMillis();
     }
 
