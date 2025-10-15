@@ -1,9 +1,0 @@
-com/inventory/model/Inventory.class
-com/inventory/service/InventoryService.class
-com/inventory/repository/InventoryRepositoryImpl.class
-com/inventory/config/KafkaConsumerConfig.class
-com/inventory/InventoryServiceApplication.class
-com/inventory/controller/InventoryController.class
-com/inventory/repository/InventoryRepository.class
-com/inventory/service/InventoryServiceImpl.class
-com/inventory/service/kafka/OrderConsumer.class

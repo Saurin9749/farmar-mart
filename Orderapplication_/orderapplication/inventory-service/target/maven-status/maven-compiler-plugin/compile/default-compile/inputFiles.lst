@@ -1,9 +1,0 @@
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/InventoryServiceApplication.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/config/KafkaConsumerConfig.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/controller/InventoryController.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/model/Inventory.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/repository/InventoryRepository.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/repository/InventoryRepositoryImpl.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/service/InventoryService.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/service/InventoryServiceImpl.java
-/Users/saurinkumarghosh/Desktop/MicroServices/orderapplication/inventory-service/src/main/java/com/inventory/service/kafka/OrderConsumer.java
