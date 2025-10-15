@@ -6,6 +6,8 @@ import io.github.resilience4j.retry.annotation.Retry;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,6 +16,8 @@ import java.util.concurrent.CompletableFuture;
 @SpringBootApplication
 @RestController
 @RequestMapping("/orders")
+@EnableFeignClients
+@EnableDiscoveryClient
 public class OrderApplication {
 
     private final RestTemplate restTemplate = new RestTemplate();
