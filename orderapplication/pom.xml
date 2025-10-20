@@ -36,6 +36,8 @@
   <modules>
     <module>order-service</module>
     <module>inventory-service</module>
+      <module>eureka-server</module>
+      <module>api-gateway</module>
   </modules>
     <build>
         <plugins>
