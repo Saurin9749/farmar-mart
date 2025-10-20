@@ -1,0 +1,6 @@
+target
+.idea
+.git
+.DS_Store
+__MACOSX
+*.iml
