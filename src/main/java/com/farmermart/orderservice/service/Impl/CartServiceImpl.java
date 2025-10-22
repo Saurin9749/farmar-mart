@@ -72,8 +72,8 @@ public class CartServiceImpl implements CartService {
                     CartRequest singleRequest = new CartRequest(
                             request.getUserId(),
                             item.getProductId(),
-                            item.getProductName(),
                             item.getPrice(),
+                            item.getProductName(),
                             item.getQuantity()
                     );
                     return addToCart(singleRequest);
