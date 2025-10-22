@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@WebMvcTest(CartController.class)
 class CartControllerTest {
 
     @Autowired
