@@ -17,6 +17,7 @@ public class Order {
     private double totalPrice;
     private String status;
 
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 
