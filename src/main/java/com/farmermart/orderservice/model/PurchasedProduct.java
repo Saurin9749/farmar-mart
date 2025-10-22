@@ -1,10 +1,12 @@
 package com.farmermart.orderservice.model;
 
+import com.farmermart.orderservice.audit.BaseAuditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name = "purchased_products",uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","product_id"})} )
@@ -12,7 +14,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchasedProduct {
+@Audited
+public class PurchasedProduct extends BaseAuditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

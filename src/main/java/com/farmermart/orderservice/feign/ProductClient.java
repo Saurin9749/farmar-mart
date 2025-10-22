@@ -1,16 +1,12 @@
 package com.farmermart.orderservice.feign;
-
 import com.farmermart.orderservice.dto.responseDto.ProductResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-public class ProductClient {
+@FeignClient(name = "product-service")
+public interface ProductClient {
 
-    public ProductResponse getProduct(Long productId) {
-    if (productId == 1L) return new ProductResponse(1L, "Product A", "Description A", 200.0, 10);
-    if (productId == 2L) return new ProductResponse(2L, "Product B", "Description B", 350.0, 5);
-    return new ProductResponse(3L, "Product C", "Description C", 150.0, 20);
-}
-
-
+    @GetMapping("/api/products/{id}")
+    ProductResponse getProduct(@PathVariable("id") Long productId);
 }

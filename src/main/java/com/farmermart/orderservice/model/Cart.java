@@ -1,9 +1,11 @@
 package com.farmermart.orderservice.model;
+import com.farmermart.orderservice.audit.BaseAuditable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 @Entity
 @Getter
@@ -11,7 +13,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Cart {
+@Audited
+public class Cart extends BaseAuditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

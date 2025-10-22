@@ -1,17 +1,11 @@
 package com.farmermart.orderservice.feign;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-@Component
-public class CartClient {
-    private final String CART_SERVICE_BASE = "http://localhost:8081/api/cart";
-    private final RestTemplate restTemplate = new RestTemplate();
-    public void removeItemFromCart(Long userId, Long productId) {
-        try {
-            String url = CART_SERVICE_BASE + "/" + userId + "/items/" + productId;
-            restTemplate.delete(url);
-        } catch (Exception ex) {
-            System.err.println("Failed to remove item from cart for user " + userId + " product " + productId + " : " + ex.getMessage());
-        }
-    }
+@FeignClient(name = "cart-service")
+public interface CartClient {
+
+    @DeleteMapping("/api/cart/{userId}/items/{productId}")
+    void removeItemFromCart(@PathVariable("userId") Long userId, @PathVariable("productId") Long productId);
 }

@@ -1,10 +1,12 @@
 package com.farmermart.orderservice.model;
 
+import com.farmermart.orderservice.audit.BaseAuditable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +17,8 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "orders")
-public class Order {
+@Audited
+public class Order extends BaseAuditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

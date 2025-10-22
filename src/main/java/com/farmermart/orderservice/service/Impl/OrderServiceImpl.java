@@ -1,5 +1,4 @@
 package com.farmermart.orderservice.service.Impl;
-
 import com.farmermart.orderservice.dto.requestDto.AddressRequest;
 import com.farmermart.orderservice.dto.requestDto.OrderItemRequest;
 import com.farmermart.orderservice.dto.requestDto.OrderRequest;
@@ -24,9 +23,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +38,6 @@ public class OrderServiceImpl implements OrderService {
     private final AddressRepository addressRepository;
     private final CartClient cartClient;
     private final PurchasedProductRepository purchasedProductRepository;
-
-
-
-
 
     @Override
     @Transactional

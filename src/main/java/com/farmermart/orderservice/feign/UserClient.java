@@ -1,12 +1,11 @@
 package com.farmermart.orderservice.feign;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import org.springframework.stereotype.Component;
+@FeignClient(name = "user-service")
+public interface UserClient {
 
-@Component
-public class UserClient {
-    public boolean validateUser(Long userId) {
-        // Placeholder implementation
-        return true;
-    }
-
+    @GetMapping("/api/users/{id}/validate")
+    Boolean validateUser(@PathVariable("id") Long userId);
 }
