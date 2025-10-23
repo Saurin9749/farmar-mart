@@ -14,6 +14,4 @@ public class CartRequest {
     private String productName;
     private int quantity;
 
-//    public CartRequest(Long userId, Long productId, String productName, Double price, int quantity) {
-//    }
 }

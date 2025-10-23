@@ -10,6 +10,7 @@ import com.farmermart.orderservice.service.CartService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,18 +68,22 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<CartResponse> addMultipleItems(CartBulkRequest request) {
-        return request.getItems().stream()
-                .map((CartItemRequest item) -> {
-                    CartRequest singleRequest = new CartRequest(
-                            request.getUserId(),
-                            item.getProductId(),
-                            item.getPrice(),
-                            item.getProductName(),
-                            item.getQuantity()
-                    );
-                    return addToCart(singleRequest);
-                })
-                .collect(Collectors.toList());
+        List<CartResponse> responses = new ArrayList<>();
+
+        for (CartItemRequest item : request.getItems()) {
+            CartRequest singleRequest = new CartRequest(
+                    request.getUserId(),
+                    item.getProductId(),
+                    item.getPrice(),
+                    item.getProductName(),
+                    item.getQuantity()
+            );
+
+            CartResponse response = addToCart(singleRequest); // 👈 key line
+            responses.add(response);
+        }
+
+        return responses;
     }
 
     private CartResponse toResponse(Cart cart) {
