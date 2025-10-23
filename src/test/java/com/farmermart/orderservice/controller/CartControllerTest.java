@@ -1,8 +1,10 @@
 package com.farmermart.orderservice.controller;
 
+import com.farmermart.orderservice.dto.requestDto.CartBulkRequest;
+import com.farmermart.orderservice.dto.requestDto.CartItemRequest;
 import com.farmermart.orderservice.dto.requestDto.CartRequest;
 import com.farmermart.orderservice.dto.responseDto.CartResponse;
-import com.farmermart.orderservice.service.Impl.CartServiceImpl;
+import com.farmermart.orderservice.service.CartService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,25 +19,30 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 /**
- * ✅ Pure JUnit 5 + Mockito test for CartController
- * No Spring context or MockMvc
+ * ✅ Unit tests for CartController using JUnit 5 + Mockito
+ * Updated to match CartBulkRequest with userId + List<CartItemRequest>
  */
 class CartControllerTest {
 
     @Mock
-    private CartServiceImpl cartService;
+    private CartService cartService;
 
     @InjectMocks
     private CartController cartController;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this); // initialize mocks
+        MockitoAnnotations.openMocks(this);
     }
 
     // ✅ Helper: Sample CartRequest
     private CartRequest sampleCartRequest() {
         return new CartRequest(1L, 10L, 50.0, "Apple", 2);
+    }
+
+    // ✅ Helper: Sample CartItemRequest
+    private CartItemRequest sampleCartItemRequest(Long productId, String name, Double price, int qty) {
+        return new CartItemRequest(productId, name, price, qty);
     }
 
     // ✅ Test: addToCart()
@@ -55,6 +62,35 @@ class CartControllerTest {
         assertEquals(100.0, response.getBody().getTotalPrice());
 
         verify(cartService, times(1)).addToCart(request);
+    }
+
+    // ✅ Test: addMultipleItems() with CartBulkRequest (using CartItemRequest)
+    @Test
+    @DisplayName("addMultipleItems() should add multiple items and return list of CartResponse")
+    void testAddMultipleItems() {
+        CartBulkRequest bulkRequest = new CartBulkRequest(
+                1L,
+                List.of(
+                        sampleCartItemRequest(10L, "Apple", 50.0, 2),
+                        sampleCartItemRequest(11L, "Banana", 30.0, 3)
+                )
+        );
+
+        List<CartResponse> mockResponses = List.of(
+                new CartResponse(1L, 1L, 10L, 2, 100.0),
+                new CartResponse(2L, 1L, 11L, 3, 90.0)
+        );
+
+        when(cartService.addMultipleItems(bulkRequest)).thenReturn(mockResponses);
+
+        ResponseEntity<List<CartResponse>> response = cartController.addMultipleItems(bulkRequest);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertNotNull(response.getBody());
+        assertEquals(2, response.getBody().size());
+        assertEquals(90.0, response.getBody().get(1).getTotalPrice());
+
+        verify(cartService, times(1)).addMultipleItems(bulkRequest);
     }
 
     // ✅ Test: removeFromCart() returns updated item (not null)
