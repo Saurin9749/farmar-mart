@@ -6,7 +6,7 @@ spring:
     name: order-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/order-project
+    url: jdbc:postgresql://localhost:5432/orderproject
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
