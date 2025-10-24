@@ -15,9 +15,14 @@ import java.util.List;
 public class OrderResponse {
     private Long orderId;
     private Long userId;
-    private Double totalPrice;
-    private String status;
-    private LocalDateTime createdAt;
-    private AddressResponse address;
-    private List<OrderItemResponse> items;
+    private Double totalPrice;           // total order amount
+    private String status;               // CREATED, FAILED, etc.
+    private LocalDateTime createdAt;     // timestamp
+    private AddressResponse address;     // shipping address
+    private List<OrderItemResponse> items; // ordered items
+    private int quantity;                // total quantity
+
+    public String Item;
+
+    public double Amount;
 }

@@ -14,4 +14,10 @@ public class OrderEvent {
     private Long userId;
     private String eventType;
     private Double totalPrice;
+
+    private String type;
+
+    private CustomerOrder order;
+
+
 }
