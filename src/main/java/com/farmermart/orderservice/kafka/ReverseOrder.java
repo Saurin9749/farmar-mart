@@ -1,4 +1,4 @@
-package com.farmermart.orderservice.service;
+package com.farmermart.orderservice.kafka;
 
 
 import com.farmermart.orderservice.dto.event.OrderEvent;
