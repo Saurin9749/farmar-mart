@@ -28,39 +28,11 @@ public class OrderController {
     @Autowired
     private KafkaTemplate<String, OrderEvent> kafkaTemplate;
 
-
-    @PostMapping
-    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest) {
-        try {
-            // 1️⃣ Create order using the service layer
-            OrderResponse response = orderService.createOrder(orderRequest);
-
-            // 2️⃣ Prepare CustomerOrder for Kafka
-            CustomerOrder customerOrder = new CustomerOrder();
-            customerOrder.setOrderId(response.getOrderId());
-            customerOrder.setQuantity(response.getQuantity());
-            customerOrder.setAmount(response.getTotalPrice());
-            customerOrder.setItems(response.getItems()); // map list if supported
-
-            // 3️⃣ Send Kafka event
-            OrderEvent event = new OrderEvent();
-            event.setOrder(customerOrder);
-            event.setType("ORDER_CREATED");
-            kafkaTemplate.send("new-orders", event);
-
-            // 4️⃣ Return API response
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            // Return meaningful response in case of error
-            OrderResponse errorResponse = new OrderResponse();
-            errorResponse.setStatus("FAILED");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-        }
+    @PostMapping("/createOrder")
+    public ResponseEntity<OrderResponse> createOrder(@RequestBody OrderRequest orderRequest){
+        OrderResponse response = orderService.createOrder(orderRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
-
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponse> getOrderById(@PathVariable Long id) {
@@ -74,7 +46,6 @@ public class OrderController {
         return ResponseEntity.ok(responses);
     }
 
-
     @PutMapping("/{orderId}/cancel")
     public ResponseEntity<Map<String, Object>> cancelOrder(@PathVariable Long orderId) {
         orderService.cancelOrder(orderId);
@@ -85,26 +56,15 @@ public class OrderController {
         return ResponseEntity.ok(response);
     }
 
-
     @PutMapping("/{orderId}/address")
     public ResponseEntity<String> editOrderAddress(@PathVariable Long orderId, @RequestBody AddressRequest newAddress){
         orderService.editOrderAddress(orderId, newAddress);
         return ResponseEntity.ok("Address edited successfully");
     }
 
-
     @PutMapping("/{id}/payment")
     public ResponseEntity<String> makePayment(@PathVariable Long id){
         String message = orderService.makePayment(id);
         return ResponseEntity.ok(message);
     }
-
-
-
-
-
-
-
-
-
 }
